@@ -1,0 +1,7 @@
+[client]
+showErrorDetails = "none"
+
+[theme]
+primaryColor = "#F04366"
+backgroundColor = "black"
+font = "cool-font, fallback-cool-font, sans-serif"
