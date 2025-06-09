@@ -25,6 +25,8 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
+groq_api_key = os.getenv('GROQ_API_KEY')
+tavily_api_key = os.getenv('TAVILY_API_KEY')
 
 # Start creating the Langraph 
 class State(TypedDict):
@@ -90,7 +92,7 @@ def build_graph(llm_with_tools, tools):
     print("Graph compiled successfully.")
     return graph_compile2
    
-def get_response(question: str):
+def get_response(question: str, api_key= groq_api_key, tav_key= tavily_api_key):
     """_summary_
 
     Args:
@@ -105,6 +107,7 @@ def get_response(question: str):
         model="qwen-qwq-32b",
         temperature=0.1,
         max_tokens=4000,
+        api_key=api_key,
         verbose=False
     )
 
@@ -116,7 +119,7 @@ def get_response(question: str):
     api_wrapper_wikipedia = WikipediaAPIWrapper(top_k_results=4, doc_content_chars_max=1000)
     wikipedia = WikipediaQueryRun(api_wrapper=api_wrapper_wikipedia, description="Wikipedia query tool")
     # Tavily Tool
-    tavily = TavilySearchResults()
+    tavily = TavilySearchResults(api_key = tav_key)
     os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
     os.environ["TAVILY_API_KEY"] = os.getenv("TAVILY_API_KEY")
 

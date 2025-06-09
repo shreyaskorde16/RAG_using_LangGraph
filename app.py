@@ -8,6 +8,11 @@ import os
 import time
 #from styles import custom_css_button,custom_css,custom_css3,custom_css_sidebar
 import styles
+from dotenv import load_dotenv
+load_dotenv()
+
+groq_api_key = os.getenv('GROQ_API_KEY')
+tavily_api_key = os.getenv('TAVILY_API_KEY')
 
 st.set_page_config(page_title="My LLM App", layout="wide")
 
@@ -48,15 +53,13 @@ with st.sidebar.form(key="My sidebar Form"):
 form_values = {
     "question": str,
     "answer": str,
-   
 }
 answer_handler = handle_status()
 
 with st.form(key="My Form"):
     st.title("User Input Form")
     st.subheader("You are Talking with AI 🤖")
-    form_values["question"] = st.text_input("Enter your question in brief")
-    
+    form_values["question"] = st.text_input("Enter your question in brief")   
     
     submit_button = st.form_submit_button("Submit")
     
@@ -66,7 +69,7 @@ with st.form(key="My Form"):
             st.warning("Please ask the Question")
         else:
             start=time.process_time()
-            form_values["answer"], langgraph_output = get_response(form_values["question"])
+            form_values["answer"], langgraph_output = get_response(form_values["question"],api_key=groq_api_key, tav_key=tavily_api_key)
             st.balloons()
             st.success("Question has been address by AI Bot Successfully!")
             answer_handler.status = True
@@ -80,8 +83,8 @@ with st.container(border=True):
         
 with st.expander("Expand to get more detailed Explanation"):
     if answer_handler.status:
-        st.write(langgraph_output[2])
         st.write(langgraph_output[3])
+        st.write(langgraph_output[2])
         
     
        
