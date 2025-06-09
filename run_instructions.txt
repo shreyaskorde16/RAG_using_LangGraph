@@ -1,0 +1,6 @@
+docker build -t streamlit-app .
+
+docker run -p 8501:8501 shreyaskorde16/rag-with-agentic-ai:latest \
+  -e GROQ_API_KEY=${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} \
+  -e TAVILY_API_KEY=${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} \
+  streamlit-app
