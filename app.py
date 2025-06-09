@@ -11,6 +11,7 @@ import styles
 
 st.set_page_config(page_title="My LLM App", layout="wide")
 
+#st.image(os.path.join(os.getcwd(), "static", "llm.png"), width=600)
 class handle_status:    
     def __init__(self):
         self.status = False
