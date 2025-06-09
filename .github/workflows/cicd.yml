@@ -57,7 +57,7 @@ jobs:
             context: .
             file: ./DockerFile
             push: true
-            tags: ${{ secrets.DOCKER_USERNAME }}/rag-with-AgenticAI:latest
+            tags: ${{ secrets.DOCKER_USERNAME }}/rag-with-agentic-ai:latest
 
         - name: Image digest
           run: echo ${{ steps.build-and-publish.outputs.digest }}
